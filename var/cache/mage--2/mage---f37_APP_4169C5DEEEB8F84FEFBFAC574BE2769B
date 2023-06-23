@@ -1,2 +1,2 @@
-a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1686130666;s:6:"expire";i:1686137866;s:4:"tags";s:49:"f37_STORE,f37_CONFIG,f37_COLLECTION_DATA,f37_MAGE";}
-[{"store_id":"1","code":"default","website_id":"1","group_id":"1","name":"Default Store View","sort_order":"0","is_active":"1"}]
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1687496548;s:6:"expire";i:1687503748;s:4:"tags";s:49:"f37_STORE,f37_CONFIG,f37_COLLECTION_DATA,f37_MAGE";}
+[{"store_id":"1","code":"default","website_id":"1","group_id":"1","name":"Default Store View","sort_order":"0","is_active":"1"},{"store_id":"5","code":"gmnstview","website_id":"1","group_id":"1","name":"german store view","sort_order":"0","is_active":"1"},{"store_id":"3","code":"gstore","website_id":"1","group_id":"1","name":"guindy store","sort_order":"0","is_active":"1"}]

@@ -1,4 +1,4 @@
-a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1686130662;s:6:"expire";i:1717666662;s:4:"tags";s:37:"f37_LAYOUT_GENERAL_CACHE_TAG,f37_MAGE";}
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1687424139;s:6:"expire";i:1718960139;s:4:"tags";s:37:"f37_LAYOUT_GENERAL_CACHE_TAG,f37_MAGE";}
 <?xml version="1.0"?>
 <layouts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><handle id="adminhtml_dashboard_index"><body>
    <referenceContainer name="content">
@@ -8195,6 +8195,16 @@ a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1686130662;s:6:"expire";i:1717666662;s:4:"t
 <body>
    <referenceContainer name="content">
       <uiComponent name="logs_form"/>
+   </referenceContainer>
+</body>
+</handle><handle id="exampleadminnewpage_helloworld_index"><referenceBlock name="page.title">
+   <action method="setPageTitle">
+      <argument name="title" xsi:type="string">Greetings</argument>
+   </action>
+</referenceBlock>
+<body>
+   <referenceContainer name="content">
+      <block class="Magento\Backend\Block\Template" template="MyCompany_ExampleAdminNewPage::helloworld.phtml"/>
    </referenceContainer>
 </body>
 </handle><handle id="adminhtml_system_config_edit"><head>
