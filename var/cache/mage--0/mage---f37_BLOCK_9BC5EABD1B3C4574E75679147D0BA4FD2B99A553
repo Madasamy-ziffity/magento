@@ -1,6 +1,0 @@
-a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1687424163;s:6:"expire";i:1687427763;s:4:"tags";s:59:"f37_BLOCK_HTML,f37_CAT_C,f37_CAT_C_35,f37_CAT_C_36,f37_MAGE";}
-
-<nav class="navigation" data-action="navigation">
-    <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
-        <li  class="level0 nav-1 category-item first level-top"><a href="http://mage.tambaram/tbmstoreview/fruits.html"  class="level-top" ><span>Fruits</span></a></li><li  class="level0 nav-2 category-item last level-top"><a href="http://mage.tambaram/tbmstoreview/bakery.html"  class="level-top" ><span>Bakery</span></a></li>            </ul>
-</nav>
