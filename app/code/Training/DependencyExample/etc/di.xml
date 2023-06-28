@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+  <type name="Training\DependencyExample\Model\Main">
+      <arguments>
+        <argument name="data" xsi:type="array">
+            <item name="id" xsi:type="string">Class Main Test</item>
+        </argument>
+      </arguments>
+  </type>
+</config>
