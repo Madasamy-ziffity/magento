@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+<menu>
+    <add id="Cloudways_Adminmenu::menu"
+         title="Cloudways" translate="title" module="Cloudways_Adminmenu"
+         sortOrder="10"
+         resource="Cloudways_Adminmenu::menu"
+    />
+    <!-- START: new node -->
+    <add id="Cloudways_Adminmenu::submenu_mymodule"
+         title="MyModule" translate="title" module="Cloudways_Adminmenu"
+         sortOrder="20" parent="Cloudways_Adminmenu::menu"
+         action="adminmenu/create/index"
+         resource="Cloudways_Adminmenu::menu"
+    />
+    <!-- END:   new node -->
+</menu>
+</config>

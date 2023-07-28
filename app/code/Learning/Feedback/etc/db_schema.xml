@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customer_feedback" resource="default" engine="innodb" comment="Feedback Entity">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Feedback ID"/>
+    <column xsi:type="varchar" name="firstname" nullable="false" length="255" comment="First Name"/>
+    <column xsi:type="varchar" name="lastname" nullable="true" length="255" comment="Last Name"/>
+    <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Email"/>
+    <column xsi:type="varchar" name="comment" nullable="true" length="255" comment="Comment"/>
+    <column xsi:type="varchar" name="status" nullable="true" length="255" comment="Status"/>
+
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="id"/>
+    </constraint>
+    </table>
+    </schema>

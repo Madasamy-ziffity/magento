@@ -7,3 +7,20 @@
 <p>
     Class Injectable id is : <?= $block->getMain()->getInjectable()->getId()?>
 </p>
+<p>Require Js example</p>
+
+<script>
+    require(['jquery', 'myscript'], function($, myscript) {
+        myscript();
+    });
+</script>
+
+<script type="text/x-magento-init">
+    {
+        "*":{
+            "Training_DependencyExample/js/myfile" : {
+                "base_url":"<?= $block->escapeJs($block->getBaseUrl()) ?>"
+            }
+        }
+    }
+</script>

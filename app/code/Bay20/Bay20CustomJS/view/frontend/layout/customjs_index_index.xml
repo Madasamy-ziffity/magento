@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <referenceContainer name="content">
+
+        <block class="Bay20\Bay20CustomJS\Block\Index" name="customjs_index_index" template="Bay20_Bay20CustomJS::test.phtml" />
+
+    </referenceContainer>
+
+</page>

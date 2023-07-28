@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+
+    <router id="standard">
+
+        <route frontName="customjs" id="customjs">
+
+            <module name="Bay20_Bay20CustomJS"/>
+
+        </route>
+
+    </router>
+
+</config>

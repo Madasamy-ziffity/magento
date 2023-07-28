@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Learning_Feedback::feedback" title="Customer Feedback" translate="title" module="Learning_Feedback" sortOrder="60" parent="Magento_Customer::customer" action="feedback/view" resource="Learning_Feedback::feedback"/>
+    </menu>
+</config>
+
+
+

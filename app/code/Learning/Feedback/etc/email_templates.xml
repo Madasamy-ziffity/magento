@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="feedback_notification_template" label="Feedback Notifications" file="feedback_notification_template.html" type="html" module="Learning_Feedback" area="frontend"/>
+    <template id="feedback_accept_template" label="Feedback Accepted" file="feedback_accept_template.html" type="html" module="Learning_Feedback" area="frontend"/>
+     <template id="feedback_decline_template" label="Feedback Declined" file="feedback_decline_template.html" type="html" module="Learning_Feedback" area="frontend"/>
+ 
+</config>

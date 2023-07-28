@@ -1,0 +1,14 @@
+<button id='click'>Add Textbox</button>
+<ul id="textboxGroup"></ul>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'customjs'
+    ],function ($) {
+        $('#click').click(function(){
+            var newTxtbox= dynamicTextbox();
+            $('#textboxGroup').append(newTxtbox);
+        });
+    });
+</script>

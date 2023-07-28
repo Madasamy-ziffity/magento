@@ -1,0 +1,15 @@
+{
+    "customer_feedback": {
+        "column": {
+            "id": true,
+            "firstname": true,
+            "lastname": true,
+            "email": true,
+            "comment": true,
+            "status": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
