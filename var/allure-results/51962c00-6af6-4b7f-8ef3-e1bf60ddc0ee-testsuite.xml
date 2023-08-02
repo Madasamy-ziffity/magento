@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alr:test-suite xmlns:alr="urn:model.allure.qatools.yandex.ru" start="1690788579246" stop="1690788579255" version="1.4.0">
+  <name>Training\UnitTest\Test\Unit\Model\Calculator</name>
+  <test-cases>
+    <test-case start="1690788579248" stop="1690788579255" status="passed">
+      <name>testAddition</name>
+    </test-case>
+  </test-cases>
+</alr:test-suite>
