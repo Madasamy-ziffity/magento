@@ -1,6 +1,6 @@
 {
-    "name": "training/unittest",
-    "description": "A module that creates a page in the Magento admin area",
+    "name": "training/importcustomers",
+    "description": "A module that creates a customers data either csv or json format",
     "type": "magento2-module",
     "version": "1.0.0",
     "license": [
@@ -13,7 +13,7 @@
     "autoload": {
       "files": [ "registration.php" ],
       "psr-4": {
-        "Training\\UnitTest\\": ""
+        "Training\\ImportCustomers\\": ""
       }
     }
   }
