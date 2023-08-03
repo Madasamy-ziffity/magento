@@ -38,8 +38,10 @@ Class Import extends Command
         $this->customer = $customer;
         $this->customerjson = $customerjson;
         $this->state = $state;
+        $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         $this->filesystemIo = $filesystemIo;
     }
+
 
     protected function configure(){
         parent::configure();
@@ -69,7 +71,6 @@ Class Import extends Command
 
             $path_parts = pathinfo($filename);
 
-            // validate the option
             if(($format != 'csv' && $format !='json' ) || $path_parts['extension'] != $format){
                 $output->writeln('<info>Provide Valid format.</info>'); exit;
             }
@@ -80,22 +81,22 @@ Class Import extends Command
 
             $copyFileFullPath = $mediaDir->getAbsolutePath() . 'fixtures/customers.'. $format; // destination file
 
-            $fileLoca = $this->filesystemIo->cp($filePath, $copyFileFullPath);  // copy the file into temporary path
+            $fileLoca = $this->filesystemIo->cp($filePath, $copyFileFullPath);
 
             $this->state->setAreaCode(Area::AREA_GLOBAL);
 
-            if($format == 'json'){   // json format imported
+            if($format == 'json'){
                        
                 $this->customerjson->install($copyFileFullPath, $output);
             }
             
-           if($format == 'csv'){  // csv format imported
+           if($format == 'csv'){
                 
                 $this->customer->install($copyFileFullPath, $output);
             }
             
             $output->writeln('<info>Customers Data Created Successfully</info>');
-            return Cli::RETURN_SUCCESS;
+            
 
         } catch (Exception $e) {
             $msg = $e->getMessage();

@@ -26,6 +26,7 @@ class Customer
         $this->customerImport = $customerImport;
     }
 
+
     public function install(string $fixture, OutputInterface $output): void
     {
         $this->output = $output;

@@ -1,6 +1,6 @@
 {
     "name": "training/importcustomers",
-    "description": "A module that creates a customers data either csv or json format",
+    "description": "A module that creates a page in the Magento admin area",
     "type": "magento2-module",
     "version": "1.0.0",
     "license": [

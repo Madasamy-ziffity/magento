@@ -5,7 +5,6 @@ namespace Training\ImportCustomers\Model;
 use Training\ImportCustomers\Model\Import\CustomerImport;
 use Symfony\Component\Console\Output\OutputInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use Exception;
 
 class CustomerJson
 {
