@@ -26,45 +26,9 @@ class Interceptor extends \Learning\Feedback\Controller\Index\ApprovedFeedback i
     /**
      * {@inheritdoc}
      */
-    public function getApprovedFeedback()
-    {
-        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getApprovedFeedback');
-        return $pluginInfo ? $this->___callPlugins('getApprovedFeedback', func_get_args(), $pluginInfo) : parent::getApprovedFeedback();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function dispatch(\Magento\Framework\App\RequestInterface $request)
     {
         $pluginInfo = $this->pluginList->getNext($this->subjectType, 'dispatch');
         return $pluginInfo ? $this->___callPlugins('dispatch', func_get_args(), $pluginInfo) : parent::dispatch($request);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getActionFlag()
-    {
-        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getActionFlag');
-        return $pluginInfo ? $this->___callPlugins('getActionFlag', func_get_args(), $pluginInfo) : parent::getActionFlag();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRequest()
-    {
-        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getRequest');
-        return $pluginInfo ? $this->___callPlugins('getRequest', func_get_args(), $pluginInfo) : parent::getRequest();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getResponse()
-    {
-        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getResponse');
-        return $pluginInfo ? $this->___callPlugins('getResponse', func_get_args(), $pluginInfo) : parent::getResponse();
     }
 }

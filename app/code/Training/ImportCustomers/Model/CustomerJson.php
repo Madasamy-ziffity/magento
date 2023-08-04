@@ -18,7 +18,7 @@ class CustomerJson
         $this->customerImport = $customerImport;
         $this->storeManagerInterface = $storeManagerInterface;
     }
-    public function install(string $fixture, OutputInterface $output): void
+    public function install(string $fixture, OutputInterface $output)
     {
         $this->output = $output;
     
@@ -30,42 +30,8 @@ class CustomerJson
         $str = file_get_contents($fixture);
 
         $json = json_decode($str, true);
-        $i=0;
         foreach ($json as $value) {
-            $this->createCustomer($value, $websiteId, $storeId);
-            $i++;
+            $this->customerImport->createCustomer($value, $websiteId, $storeId);
         }
-    }
-
-    private function createCustomer(array $data, int $websiteId, int $storeId): void
-    {
-      try {
-          // collect the customer data
-          $customerData = [
-              'email'         => $data['emailaddress'],
-              '_website'      => 'base',
-              '_store'        => 'default',
-              'confirmation'  => null,
-              'dob'           => null,
-              'firstname'     => $data['fname'],
-              'gender'        => null,
-              'lastname'      => $data['lname'],
-              'middlename'    => null,
-              'prefix'        => null,
-              'store_id'      => $storeId,
-              'website_id'    => $websiteId,
-              'password'      => null,
-              'disable_auto_group_change' => 0,
-              'some_custom_attribute'     => 'some_custom_attribute_value'
-           ];
-     
-          // save the customer data
-          $this->customerImport->importCustomerData($customerData);
-      } catch (Exception $e) {
-          $this->output->writeln(
-              '<error>'. $e->getMessage() .'</error>',
-              OutputInterface::OUTPUT_NORMAL
-          );
-      }
     }
 }

@@ -15,8 +15,9 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Training\ImportCustomers\Model\Customer;
+use Training\ImportCustomers\Model\CustomerCsv;
 use Training\ImportCustomers\Model\CustomerJson;
+
 Class Import extends Command
 {
     private $filesystem;
@@ -28,20 +29,18 @@ Class Import extends Command
     
     public function __construct(
         Filesystem $filesystem,
-        Customer $customer,
-        CustomerJson $customerjson,
+        CustomerCsv $Custcsv,
+        CustomerJson $CustJson,
         State $state,
         \Magento\Framework\Filesystem\Io\File $filesystemIo
     ) {
     parent::__construct();
         $this->filesystem = $filesystem;
-        $this->customer = $customer;
-        $this->customerjson = $customerjson;
+        $this->Custcsv = $Custcsv;
+        $this->CustJson = $CustJson;
         $this->state = $state;
-        $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         $this->filesystemIo = $filesystemIo;
     }
-
 
     protected function configure(){
         parent::configure();
@@ -59,45 +58,26 @@ Class Import extends Command
             InputArgument::REQUIRED,
             'description'
         );
-
-        
     }
     protected function execute(InputInterface $input, OutputInterface $output){
         try {
-
-            $filename = $input->getArgument(self::INPUT_FILE);
-
+            $filename = $input->getArgument(self::INPUT_FILE); // source file
             $format = $input->getOption('profile');
-
-            $path_parts = pathinfo($filename);
-
-            if(($format != 'csv' && $format !='json' ) || $path_parts['extension'] != $format){
-                $output->writeln('<info>Provide Valid format.</info>'); exit;
-            }
-
-            $filePath  = $filename;//source file
-
+            $PathParts = pathinfo($filename);
+                if(($format != 'csv' && $format !='json' ) || $PathParts['extension'] != $format){
+                    $output->writeln('<info>Provide Valid format.</info>'); exit;
+                }
             $mediaDir = $this->filesystem->getDirectoryWrite(DirectoryList::MEDIA);
-
             $copyFileFullPath = $mediaDir->getAbsolutePath() . 'fixtures/customers.'. $format; // destination file
-
-            $fileLoca = $this->filesystemIo->cp($filePath, $copyFileFullPath);
-
+            $this->filesystemIo->cp($filename, $copyFileFullPath);
             $this->state->setAreaCode(Area::AREA_GLOBAL);
-
-            if($format == 'json'){
-                       
-                $this->customerjson->install($copyFileFullPath, $output);
-            }
-            
-           if($format == 'csv'){
-                
-                $this->customer->install($copyFileFullPath, $output);
-            }
-            
+                if($format == 'json'){
+                $this->CustJson->install($copyFileFullPath, $output);
+                }
+                if($format == 'csv'){
+                    $this->Custcsv->install($copyFileFullPath, $output);
+                }
             $output->writeln('<info>Customers Data Created Successfully</info>');
-            
-
         } catch (Exception $e) {
             $msg = $e->getMessage();
             $output->writeln("<error>$msg</error>", OutputInterface::OUTPUT_NORMAL);
