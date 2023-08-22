@@ -350,6 +350,8 @@ return [
         'Nexcess_CustomModule' => 1,
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,
+        'Prepare_Acl' => 1,
+        'Prepare_Admingrid' => 1,
         'Temando_ShippingRemover' => 1,
         'Thecoachsmb_Mymodule' => 1,
         'Training_AttrDisplay' => 1,

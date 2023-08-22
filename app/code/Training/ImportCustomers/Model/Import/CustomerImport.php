@@ -13,34 +13,16 @@ class CustomerImport extends Customer
       $this->prepareCustomerData($rowData);
       $entitiesToCreate = [];
       $entitiesToUpdate = [];
-      $entitiesToDelete = [];
-      $attributesToSave = [];
-     
+           
       $processedData = $this->_prepareDataForUpdate($rowData);
       $entitiesToCreate = array_merge($entitiesToCreate, $processedData[self::ENTITIES_TO_CREATE_KEY]);
-      $entitiesToUpdate = array_merge($entitiesToUpdate, $processedData[self::ENTITIES_TO_UPDATE_KEY]);
-      foreach ($processedData[self::ATTRIBUTES_TO_SAVE_KEY] as $tableName => $customerAttributes) {
-          if (!isset($attributesToSave[$tableName])) {
-              $attributesToSave[$tableName] = [];
-          }
-          $attributesToSave[$tableName] = array_diff_key(
-              $attributesToSave[$tableName],
-              $customerAttributes
-          ) + $customerAttributes;
-      }
-     
-      $this->updateItemsCounterStats($entitiesToCreate, $entitiesToUpdate, $entitiesToDelete);
-     
+                 
       /**
         * Save prepared data
         */
-      if ($entitiesToCreate || $entitiesToUpdate) {
+      if ($entitiesToCreate) {
           $this->_saveCustomerEntities($entitiesToCreate, $entitiesToUpdate);
       }
-      if ($attributesToSave) {
-          $this->_saveCustomerAttributes($attributesToSave);
-      }
-     
       return $entitiesToCreate[0]['entity_id'] ?? $entitiesToUpdate[0]['entity_id'] ?? null;
     }
     public function createCustomer(array $data, int $websiteId, int $storeId): void
@@ -61,8 +43,7 @@ class CustomerImport extends Customer
               'store_id'      => $storeId,
               'website_id'    => $websiteId,
               'password'      => null,
-              'disable_auto_group_change' => 0,
-              'some_custom_attribute'     => 'some_custom_attribute_value'
+              'disable_auto_group_change' => 0
            ];
      
           // save the customer data

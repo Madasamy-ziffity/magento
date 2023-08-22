@@ -2960,6 +2960,14 @@
         'instance' => 'PayPal\\Braintree\\Plugin\\ExcludeFromMinification',
       ),
     ),
+    'Prepare\\Admingrid\\Ui\\DataProvider\\Category\\ListingDataProvider' => 
+    array (
+      'dev_grid_attributes' => 
+      array (
+        'sortOrder' => 0,
+        'instance' => 'Prepare\\Admingrid\\Plugin\\AddAttributesToUiDataProvider',
+      ),
+    ),
     'Magento\\Checkout\\Model\\Cart' => 
     array (
       'WebkulCart' => 
@@ -4308,6 +4316,22 @@
     'BraintreeLpmAuthorizeRequest' => NULL,
     'BraintreeLpmAuthorizationHandler' => NULL,
     'BraintreeLpmSaleRequest' => NULL,
+    'Prepare\\Admingrid\\Ui\\DataProvider\\Category\\Listing\\Collection' => 
+    array (
+      'currentPageDetection' => 
+      array (
+        'sortOrder' => 0,
+        'instance' => 'Magento\\Theme\\Plugin\\Data\\Collection',
+      ),
+    ),
+    'DevGridCategoryCollection' => 
+    array (
+      'currentPageDetection' => 
+      array (
+        'sortOrder' => 0,
+        'instance' => 'Magento\\Theme\\Plugin\\Data\\Collection',
+      ),
+    ),
     'Vertex\\Tax\\Model\\ResourceModel\\VertexTaxCode' => NULL,
     'Vertex\\Tax\\Virtual\\ResourceModel\\Creditmemo\\VertexTaxCode' => NULL,
     'Vertex\\Tax\\Model\\ResourceModel\\TaxCode' => NULL,
@@ -8318,6 +8342,14 @@
         'instance' => 'PayPal\\Braintree\\Plugin\\ExcludeFromMinification',
       ),
     ),
+    'Prepare\\Admingrid\\Ui\\DataProvider\\Category\\ListingDataProvider' => 
+    array (
+      'dev_grid_attributes' => 
+      array (
+        'sortOrder' => 0,
+        'instance' => 'Prepare\\Admingrid\\Plugin\\AddAttributesToUiDataProvider',
+      ),
+    ),
     'Magento\\Checkout\\Model\\Cart\\CartInterface' => NULL,
     'Magento\\Checkout\\Model\\Cart' => 
     array (
@@ -8648,6 +8680,20 @@
       4 => 
       array (
         0 => 'klarnaKpCollector',
+      ),
+    ),
+    'Prepare\\Admingrid\\Ui\\DataProvider\\Category\\Listing\\Collection_getCurPage___self' => 
+    array (
+      4 => 
+      array (
+        0 => 'currentPageDetection',
+      ),
+    ),
+    'DevGridCategoryCollection_getCurPage___self' => 
+    array (
+      4 => 
+      array (
+        0 => 'currentPageDetection',
       ),
     ),
     'Magento\\Framework\\DB\\Adapter\\AdapterInterface_commit___self' => 
@@ -12019,6 +12065,13 @@
       4 => 
       array (
         0 => 'braintreeExcludeFromMinification',
+      ),
+    ),
+    'Prepare\\Admingrid\\Ui\\DataProvider\\Category\\ListingDataProvider_getSearchResult___self' => 
+    array (
+      4 => 
+      array (
+        0 => 'dev_grid_attributes',
       ),
     ),
     'Magento\\Checkout\\Model\\Cart_addProduct___self' => 

@@ -1424,6 +1424,8 @@
   'paypal\\braintree\\controller\\kount\\ens' => 'PayPal\\Braintree\\Controller\\Kount\\Ens',
   'paypal\\braintree\\controller\\payment\\updatepaymentmethod' => 'PayPal\\Braintree\\Controller\\Payment\\UpdatePaymentMethod',
   'paypal\\braintree\\controller\\payment\\getnonce' => 'PayPal\\Braintree\\Controller\\Payment\\GetNonce',
+  'prepare\\admingrid\\controller\\adminhtml\\index\\index' => 'Prepare\\Admingrid\\Controller\\Adminhtml\\Index\\Index',
+  'prepare\\admingrid\\controller\\adminhtml\\category\\massdelete' => 'Prepare\\Admingrid\\Controller\\Adminhtml\\Category\\MassDelete',
   'thecoachsmb\\mymodule\\controller\\index\\index' => 'Thecoachsmb\\Mymodule\\Controller\\Index\\Index',
   'training\\dependencyexample\\controller\\index\\index' => 'Training\\DependencyExample\\Controller\\Index\\index',
   'training\\knockout\\controller\\index\\index' => 'Training\\Knockout\\Controller\\Index\\index',

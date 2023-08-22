@@ -7,15 +7,13 @@ use Generator;
 use Magento\Framework\Filesystem\Io\File;
 use Magento\Store\Model\StoreManagerInterface;
 use Training\ImportCustomers\Model\Import\CustomerImport;
-use Symfony\Component\Console\Output\OutputInterface;
  
 class CustomerCsv
 {
     private $file;
     private $storeManagerInterface;
     private $customerImport;
-    private $output;
-    
+        
     public function __construct(
         File $file,
         StoreManagerInterface $storeManagerInterface,
@@ -27,10 +25,8 @@ class CustomerCsv
     }
 
 
-    public function install(string $fixture, OutputInterface $output)
+    public function install(string $fixture)
     {
-        $this->output = $output;
-    
         // get store and website ID
         $store = $this->storeManagerInterface->getStore();
         $websiteId = (int) $this->storeManagerInterface->getWebsite()->getId();

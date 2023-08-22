@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+     <add id="Prepare_Acl::menu" title="Custom Menu" module="Prepare_Acl" sortOrder="10" resource="Prepare_Acl::menu"/>
+     <add id="Prepare_Acl::create" title="Create" module="Prepare_Acl" sortOrder="10" parent="Prepare_Acl::menu" action="custommenu/create/index" resource="Prepare_Acl::create"/>
+     <add id="Prepare_Acl::delete" title="Delete" module="Prepare_Acl" sortOrder="20" parent="Prepare_Acl::menu" action="custommenu/delete/index" resource="Prepare_Acl::delete"/>
+     <add id="Prepare_Acl::view" title="View" module="Prepare_Acl" sortOrder="30" parent="Prepare_Acl::menu" action="custommenu/view/index" resource="Prepare_Acl::view"/>
+    </menu>
+</config>

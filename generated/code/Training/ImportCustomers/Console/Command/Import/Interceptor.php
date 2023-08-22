@@ -8,10 +8,10 @@ class Interceptor extends \Training\ImportCustomers\Console\Command\Import imple
 {
     use \Magento\Framework\Interception\Interceptor;
 
-    public function __construct(\Magento\Framework\Filesystem $filesystem, \Training\ImportCustomers\Model\CustomerCsv $Custcsv, \Training\ImportCustomers\Model\CustomerJson $CustJson, \Magento\Framework\App\State $state, \Magento\Framework\Filesystem\Io\File $filesystemIo)
+    public function __construct(\Magento\Framework\Filesystem $filesystem, \Training\ImportCustomers\Model\CustomerCsv $custCsv, \Training\ImportCustomers\Model\CustomerJson $custJson, \Magento\Framework\App\State $state, \Magento\Framework\Filesystem\Io\File $filesystemIo)
     {
         $this->___init();
-        parent::__construct($filesystem, $Custcsv, $CustJson, $state, $filesystemIo);
+        parent::__construct($filesystem, $custCsv, $custJson, $state, $filesystemIo);
     }
 
     /**

@@ -3046,6 +3046,14 @@
         'instance' => 'PayPal\\Braintree\\Plugin\\ExcludeFromMinification',
       ),
     ),
+    'Prepare\\Admingrid\\Ui\\DataProvider\\Category\\ListingDataProvider' => 
+    array (
+      'dev_grid_attributes' => 
+      array (
+        'sortOrder' => 0,
+        'instance' => 'Prepare\\Admingrid\\Plugin\\AddAttributesToUiDataProvider',
+      ),
+    ),
     'Magento\\Checkout\\Model\\Cart' => 
     array (
       'WebkulCart' => 
@@ -7477,6 +7485,14 @@
         'instance' => 'PayPal\\Braintree\\Plugin\\ExcludeFromMinification',
       ),
     ),
+    'Prepare\\Admingrid\\Ui\\DataProvider\\Category\\ListingDataProvider' => 
+    array (
+      'dev_grid_attributes' => 
+      array (
+        'sortOrder' => 0,
+        'instance' => 'Prepare\\Admingrid\\Plugin\\AddAttributesToUiDataProvider',
+      ),
+    ),
     'Magento\\Checkout\\Model\\Cart\\CartInterface' => NULL,
     'Magento\\Checkout\\Model\\Cart' => 
     array (
@@ -11191,6 +11207,13 @@
       4 => 
       array (
         0 => 'braintreeExcludeFromMinification',
+      ),
+    ),
+    'Prepare\\Admingrid\\Ui\\DataProvider\\Category\\ListingDataProvider_getSearchResult___self' => 
+    array (
+      4 => 
+      array (
+        0 => 'dev_grid_attributes',
       ),
     ),
     'Magento\\Checkout\\Model\\Cart_addProduct___self' => 

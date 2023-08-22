@@ -29,15 +29,15 @@ Class Import extends Command
     
     public function __construct(
         Filesystem $filesystem,
-        CustomerCsv $Custcsv,
-        CustomerJson $CustJson,
+        CustomerCsv $custCsv,
+        CustomerJson $custJson,
         State $state,
         \Magento\Framework\Filesystem\Io\File $filesystemIo
     ) {
     parent::__construct();
         $this->filesystem = $filesystem;
-        $this->Custcsv = $Custcsv;
-        $this->CustJson = $CustJson;
+        $this->custCsv = $custCsv;
+        $this->custJson = $custJson;
         $this->state = $state;
         $this->filesystemIo = $filesystemIo;
     }
@@ -63,19 +63,19 @@ Class Import extends Command
         try {
             $filename = $input->getArgument(self::INPUT_FILE); // source file
             $format = $input->getOption('profile');
-            $PathParts = pathinfo($filename);
-                if(($format != 'csv' && $format !='json' ) || $PathParts['extension'] != $format){
+            $pathParts = pathinfo($filename);
+                if(($format !== 'csv' && $format !=='json' ) || $pathParts['extension'] !== $format){
                     $output->writeln('<info>Provide Valid format.</info>'); exit;
                 }
             $mediaDir = $this->filesystem->getDirectoryWrite(DirectoryList::MEDIA);
             $copyFileFullPath = $mediaDir->getAbsolutePath() . 'fixtures/customers.'. $format; // destination file
             $this->filesystemIo->cp($filename, $copyFileFullPath);
             $this->state->setAreaCode(Area::AREA_GLOBAL);
-                if($format == 'json'){
-                $this->CustJson->install($copyFileFullPath, $output);
+                if($format === 'json'){
+                    $this->custJson->install($copyFileFullPath);
                 }
-                if($format == 'csv'){
-                    $this->Custcsv->install($copyFileFullPath, $output);
+                if($format === 'csv'){
+                    $this->custCsv->install($copyFileFullPath);
                 }
             $output->writeln('<info>Customers Data Created Successfully</info>');
         } catch (Exception $e) {
