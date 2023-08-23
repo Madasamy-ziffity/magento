@@ -24,6 +24,7 @@ Class Import extends Command
     private $customer;
     private $customerjson;
     private $state;
+    protected $dir;
 
     const INPUT_FILE = 'file';
     
@@ -32,7 +33,8 @@ Class Import extends Command
         CustomerCsv $custCsv,
         CustomerJson $custJson,
         State $state,
-        \Magento\Framework\Filesystem\Io\File $filesystemIo
+        \Magento\Framework\Filesystem\Io\File $filesystemIo,
+        \Magento\Framework\Filesystem\DirectoryList $dir
     ) {
     parent::__construct();
         $this->filesystem = $filesystem;
@@ -40,6 +42,7 @@ Class Import extends Command
         $this->custJson = $custJson;
         $this->state = $state;
         $this->filesystemIo = $filesystemIo;
+        $this->dir = $dir;
     }
 
     protected function configure(){
@@ -67,8 +70,7 @@ Class Import extends Command
                 if(($format !== 'csv' && $format !=='json' ) || $pathParts['extension'] !== $format){
                     $output->writeln('<info>Provide Valid format.</info>'); exit;
                 }
-            $mediaDir = $this->filesystem->getDirectoryWrite(DirectoryList::MEDIA);
-            $copyFileFullPath = $mediaDir->getAbsolutePath() . 'fixtures/customers.'. $format; // destination file
+            $copyFileFullPath = $this->dir->getPath('var'). '/fixtures/customers.'. $format; // destination file
             $this->filesystemIo->cp($filename, $copyFileFullPath);
             $this->state->setAreaCode(Area::AREA_GLOBAL);
                 if($format === 'json'){

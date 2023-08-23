@@ -7,21 +7,25 @@ use Generator;
 use Magento\Framework\Filesystem\Io\File;
 use Magento\Store\Model\StoreManagerInterface;
 use Training\ImportCustomers\Model\Import\CustomerImport;
+use Magento\Framework\File\Csv;
  
 class CustomerCsv
 {
     private $file;
     private $storeManagerInterface;
     private $customerImport;
+    private $csvParser;
         
     public function __construct(
         File $file,
         StoreManagerInterface $storeManagerInterface,
-        CustomerImport $customerImport
+        CustomerImport $customerImport,
+        Csv $csvParser
     ) {
         $this->file = $file;
         $this->storeManagerInterface = $storeManagerInterface;
         $this->customerImport = $customerImport;
+        $this->csvParser = $csvParser;
     }
 
 
@@ -32,47 +36,32 @@ class CustomerCsv
         $websiteId = (int) $this->storeManagerInterface->getWebsite()->getId();
         $storeId = (int) $store->getId();
     
-        // read the csv header
-        $header = $this->readCsvHeader($fixture)->current();
-    
-        // read the csv file and skip the first (header) row
-        $row = $this->readCsvRows($fixture, $header);
-        $row->next();
-    
-        // while the generator is open, read current row data, create a customer and resume the generator
-        while ($row->valid()) {
-            $data = $row->current();
-            $this->customerImport->createCustomer($data, $websiteId, $storeId);
-            $row->next();
-        }
-    }
+        $row = $this->readCsvRows($fixture);
 
-    private function readCsvRows(string $file, array $header): ?Generator
-    {
-        $handle = fopen($file, 'rb');
-    
-        while (!feof($handle)) {
-            $data = [];
-            $rowData = fgetcsv($handle);
-            if ($rowData) {
-                foreach ($rowData as $key => $value) {
-                    $data[$header[$key]] = $value;
-                }
-                yield $data;
+        foreach ($row as $data => $values) {
+            foreach($values as $key => $value){
+            $this->customerImport->createCustomer($value, $websiteId, $storeId);
             }
         }
-    
-        fclose($handle);
+        
+    }
+
+    private function readCsvRows(string $file): ?Generator
+    {
+            $chunks = [];
+            $data = [];
+            $contents = $this->csvParser->getData($file);
+            $headers = !empty($contents) ? $contents[0] : [];
+            foreach ($contents as $row => $values) {
+                if ($row > 0) {
+                    foreach ($values as $key => $value) {
+                        $data[$headers[$key]] = $value;
+                    }
+                    $chunks[] = $data;
+                }
+            }
+            yield $chunks;
+
     }
  
-    private function readCsvHeader(string $file): ?Generator
-    {
-        $handle = fopen($file, 'rb');
-    
-        while (!feof($handle)) {
-            yield fgetcsv($handle);
-        }
-    
-        fclose($handle);
-    }
 }

@@ -12,15 +12,15 @@ class CustomerJson
     private $customerImport;
     private $storeManagerInterface;
     private $file;
-    private $serializerinterface;
+    private $serializerInterface;
 
     public function __construct(
-        CustomerImport $customerImport,StoreManagerInterface $storeManagerInterface,File $file, SerializerInterface $serializerinterface
+        CustomerImport $customerImport,StoreManagerInterface $storeManagerInterface,File $file, SerializerInterface $serializerInterface
     ) {
         $this->customerImport = $customerImport;
         $this->storeManagerInterface = $storeManagerInterface;
         $this->file = $file;
-        $this->serializerinterface = $serializerinterface;
+        $this->serializerInterface = $serializerInterface;
     }
     public function install(string $fixture)
     {
@@ -32,7 +32,7 @@ class CustomerJson
 
         $str = $this->file->fileGetContents($fixture);
 
-        $json = $this->serializerinterface->unserialize($str, true);
+        $json = $this->serializerInterface->unserialize($str, true);
         foreach ($json as $value) {
             $this->customerImport->createCustomer($value, $websiteId, $storeId);
         }
