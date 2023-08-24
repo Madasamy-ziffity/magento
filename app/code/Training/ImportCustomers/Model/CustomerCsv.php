@@ -28,7 +28,12 @@ class CustomerCsv
         $this->csvParser = $csvParser;
     }
 
-
+    /**
+     * @param string $fixture
+     *
+     * @return null
+     *
+     */
     public function install(string $fixture)
     {
         // get store and website ID
@@ -36,32 +41,27 @@ class CustomerCsv
         $websiteId = (int) $this->storeManagerInterface->getWebsite()->getId();
         $storeId = (int) $store->getId();
     
-        $row = $this->readCsvRows($fixture);
-
-        foreach ($row as $data => $values) {
-            foreach($values as $key => $value){
-            $this->customerImport->createCustomer($value, $websiteId, $storeId);
-            }
-        }
-        
+        $this->readCsvRows($fixture,$websiteId,$storeId);
     }
-
-    private function readCsvRows(string $file): ?Generator
+    /**
+     * @param string $file
+     * @param int $websiteId,$storeId
+     *
+     * @return null
+     *
+     */
+    private function readCsvRows(string $file,int $websiteId, int $storeId)
     {
-            $chunks = [];
-            $data = [];
-            $contents = $this->csvParser->getData($file);
-            $headers = !empty($contents) ? $contents[0] : [];
-            foreach ($contents as $row => $values) {
-                if ($row > 0) {
-                    foreach ($values as $key => $value) {
-                        $data[$headers[$key]] = $value;
-                    }
-                    $chunks[] = $data;
-                }
+        $data = [];
+        $contents = $this->csvParser->getData($file);
+        $headers = !empty($contents) ? $contents[0] : [];
+        foreach ($contents as $row => $values) {
+        if ($row > 0) {
+            foreach ($values as $key => $value) {
+                $data[$headers[$key]] = $value;
             }
-            yield $chunks;
-
+            $this->customerImport->createCustomer($data, $websiteId, $storeId);
+        }
+        }
     }
- 
-}
+ }

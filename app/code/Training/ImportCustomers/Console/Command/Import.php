@@ -17,6 +17,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Training\ImportCustomers\Model\CustomerCsv;
 use Training\ImportCustomers\Model\CustomerJson;
+use Magento\Framework\Filesystem\Io\File;
+use Magento\Framework\Filesystem\DirectoryList as DirectoryListPath;
 
 Class Import extends Command
 {
@@ -33,8 +35,8 @@ Class Import extends Command
         CustomerCsv $custCsv,
         CustomerJson $custJson,
         State $state,
-        \Magento\Framework\Filesystem\Io\File $filesystemIo,
-        \Magento\Framework\Filesystem\DirectoryList $dir
+        File $filesystemIo,
+        DirectoryListPath $dir
     ) {
     parent::__construct();
         $this->filesystem = $filesystem;
@@ -62,23 +64,31 @@ Class Import extends Command
             'description'
         );
     }
+     /**
+     * Import customers csv or json data through CLI Command
+     *
+     * @param string $input,$output
+     *
+     * @return OutputInterface,$output
+     *
+     */
     protected function execute(InputInterface $input, OutputInterface $output){
         try {
             $filename = $input->getArgument(self::INPUT_FILE); // source file
             $format = $input->getOption('profile');
             $pathParts = pathinfo($filename);
-                if(($format !== 'csv' && $format !=='json' ) || $pathParts['extension'] !== $format){
-                    $output->writeln('<info>Provide Valid format.</info>'); exit;
-                }
+            if(($format !== 'csv' && $format !=='json' ) || $pathParts['extension'] !== $format){
+                $output->writeln('<info>Provide Valid format.</info>'); exit;
+            }
             $copyFileFullPath = $this->dir->getPath('var'). '/fixtures/customers.'. $format; // destination file
             $this->filesystemIo->cp($filename, $copyFileFullPath);
             $this->state->setAreaCode(Area::AREA_GLOBAL);
-                if($format === 'json'){
-                    $this->custJson->install($copyFileFullPath);
-                }
-                if($format === 'csv'){
-                    $this->custCsv->install($copyFileFullPath);
-                }
+            if($format === 'json'){
+                $this->custJson->install($copyFileFullPath);
+            }
+            if($format === 'csv'){
+                $this->custCsv->install($copyFileFullPath);
+            }
             $output->writeln('<info>Customers Data Created Successfully</info>');
         } catch (Exception $e) {
             $msg = $e->getMessage();

@@ -16,15 +16,19 @@ class CustomerImport extends Customer
            
       $processedData = $this->_prepareDataForUpdate($rowData);
       $entitiesToCreate = array_merge($entitiesToCreate, $processedData[self::ENTITIES_TO_CREATE_KEY]);
-                 
       /**
         * Save prepared data
         */
       if ($entitiesToCreate) {
           $this->_saveCustomerEntities($entitiesToCreate, $entitiesToUpdate);
       }
-      return $entitiesToCreate[0]['entity_id'] ?? $entitiesToUpdate[0]['entity_id'] ?? null;
     }
+     /**
+     * @param array $data
+     * @param int $websiteId,$storeId
+     * @return null
+     *
+     */
     public function createCustomer(array $data, int $websiteId, int $storeId): void
     {
       try {
