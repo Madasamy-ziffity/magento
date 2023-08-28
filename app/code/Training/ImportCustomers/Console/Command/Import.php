@@ -67,30 +67,36 @@ Class Import extends Command
      /**
      * Import customers csv or json data through CLI Command
      *
-     * @param string $input,$output
+     * @param string $input
+     * @param string $output
      *
      * @return OutputInterface,$output
-     *
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output){
         try {
             $filename = $input->getArgument(self::INPUT_FILE); // source file
-            $format = $input->getOption('profile');
             $pathParts = pathinfo($filename);
-            if(($format !== 'csv' && $format !=='json' ) || $pathParts['extension'] !== $format){
-                $output->writeln('<info>Provide Valid format.</info>'); exit;
+            $format = $input->getOption('profile');
+            if(!empty($format)){
+                if($format !== 'csv' && $format !=='json'){    
+                    $output->writeln('<error>Provide Valid format.</error>'); exit;
+                }
             }
-            $copyFileFullPath = $this->dir->getPath('var'). '/fixtures/customers.'. $format; // destination file
+            if($pathParts['extension'] !== 'csv' && $pathParts['extension'] !=='json'){    
+                $output->writeln('<error>Provide Valid format.</error>'); exit;
+            }
+            $copyFileFullPath = $this->dir->getPath('var'). '/customers.'. $pathParts['extension']; // destination file
             $this->filesystemIo->cp($filename, $copyFileFullPath);
             $this->state->setAreaCode(Area::AREA_GLOBAL);
-            if($format === 'json'){
-                $this->custJson->install($copyFileFullPath);
+            if($pathParts['extension'] === 'json'){
+                $this->custJson->install($copyFileFullPath,$output);
             }
-            if($format === 'csv'){
-                $this->custCsv->install($copyFileFullPath);
+            if($pathParts['extension'] === 'csv'){
+                $this->custCsv->install($copyFileFullPath,$output);
             }
             $output->writeln('<info>Customers Data Created Successfully</info>');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $msg = $e->getMessage();
             $output->writeln("<error>$msg</error>", OutputInterface::OUTPUT_NORMAL);
             return Cli::RETURN_FAILURE;

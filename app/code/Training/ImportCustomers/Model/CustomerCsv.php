@@ -2,27 +2,22 @@
  
 namespace Training\ImportCustomers\Model;
  
-use Exception;
-use Generator;
-use Magento\Framework\Filesystem\Io\File;
 use Magento\Store\Model\StoreManagerInterface;
 use Training\ImportCustomers\Model\Import\CustomerImport;
 use Magento\Framework\File\Csv;
+use Symfony\Component\Console\Output\OutputInterface;
  
 class CustomerCsv
 {
-    private $file;
     private $storeManagerInterface;
     private $customerImport;
     private $csvParser;
         
     public function __construct(
-        File $file,
         StoreManagerInterface $storeManagerInterface,
         CustomerImport $customerImport,
         Csv $csvParser
     ) {
-        $this->file = $file;
         $this->storeManagerInterface = $storeManagerInterface;
         $this->customerImport = $customerImport;
         $this->csvParser = $csvParser;
@@ -30,37 +25,38 @@ class CustomerCsv
 
     /**
      * @param string $fixture
-     *
-     * @return null
+     * @param OutputInterface $output
+     * @return void
      *
      */
-    public function install(string $fixture)
+    public function install(string $fixture,OutputInterface $output)
     {
         // get store and website ID
         $store = $this->storeManagerInterface->getStore();
         $websiteId = (int) $this->storeManagerInterface->getWebsite()->getId();
         $storeId = (int) $store->getId();
     
-        $this->readCsvRows($fixture,$websiteId,$storeId);
+        $this->readCsvRows($fixture,$websiteId,$storeId,$output);
     }
     /**
-     * @param string $file
-     * @param int $websiteId,$storeId
-     *
-     * @return null
+     * @param string $fixture
+     * @param int $websiteId
+     * @param int $storeId
+     * @param OutputInterface $output
+     * @return void
      *
      */
-    private function readCsvRows(string $file,int $websiteId, int $storeId)
+    private function readCsvRows(string $fixture,int $websiteId, int $storeId,OutputInterface $output)
     {
         $data = [];
-        $contents = $this->csvParser->getData($file);
+        $contents = $this->csvParser->getData($fixture);
         $headers = !empty($contents) ? $contents[0] : [];
         foreach ($contents as $row => $values) {
         if ($row > 0) {
             foreach ($values as $key => $value) {
                 $data[$headers[$key]] = $value;
             }
-            $this->customerImport->createCustomer($data, $websiteId, $storeId);
+            $this->customerImport->createCustomer($data, $websiteId, $storeId,$output);
         }
         }
     }

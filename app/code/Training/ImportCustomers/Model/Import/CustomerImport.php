@@ -1,13 +1,12 @@
 <?php
  
 namespace Training\ImportCustomers\Model\Import;
- 
+use Exception; 
 use Magento\CustomerImportExport\Model\Import\Customer;
 use Symfony\Component\Console\Output\OutputInterface;
  
 class CustomerImport extends Customer
 {
-    private $output;
     public function importCustomerData(array $rowData)
     {
       $this->prepareCustomerData($rowData);
@@ -25,11 +24,13 @@ class CustomerImport extends Customer
     }
      /**
      * @param array $data
-     * @param int $websiteId,$storeId
-     * @return null
+     * @param int $websiteId
+     * @param int $storeId
+     * @param OutputInterface $output
+     * @return void
      *
      */
-    public function createCustomer(array $data, int $websiteId, int $storeId): void
+    public function createCustomer(array $data, int $websiteId, int $storeId,OutputInterface $output): void
     {
       try {
           // collect the customer data
@@ -50,10 +51,10 @@ class CustomerImport extends Customer
               'disable_auto_group_change' => 0
            ];
      
-          // save the customer data
+         // save the customer data
           $this->importCustomerData($customerData);
-      } catch (Exception $e) {
-          $this->output->writeln(
+      } catch (\Exception $e) {
+          $output->writeln(
               '<error>'. $e->getMessage() .'</error>',
               OutputInterface::OUTPUT_NORMAL
           );
